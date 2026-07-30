@@ -5,7 +5,14 @@ import { fadeUp, fadeIn, viewportOnce } from "../../utils/animations";
 
 const Projects = () => {
   const videoRefs = useRef([]);
-  const cardVideos = ["/project1.mp4", "/project2.mp4", "/project3.mp4"];
+  const cardVideos = [
+    "/project1.mp4",
+    "/project2.mp4",
+    "/project3.mp4",
+    "/project4.mp4",
+    "/project5.mp4",
+    "/project6.mp4",
+  ];
 
   return (
     <section
@@ -52,84 +59,97 @@ const Projects = () => {
               whileInView="visible"
               viewport={viewportOnce}
               transition={{ delay: i * 0.1 }}
+              onMouseEnter={() => {
+                const vid = videoRefs.current[i];
+                if (vid) vid.play();
+              }}
+              onMouseLeave={() => {
+                const vid = videoRefs.current[i];
+                if (vid) {
+                  vid.pause();
+                  vid.currentTime = 0;
+                }
+              }}
               className="group relative h-[420px] w-full max-w-[280px] overflow-hidden rounded-xl border border-cyan-500/30 bg-neutral-900/40 backdrop-blur-sm shadow-[0_0_25px_rgba(34,211,238,0.15)] hover:border-cyan-400/60 transition-colors duration-300"
             >
-              <div className="absolute inset-0.5 z-[1] flex flex-col items-start justify-start gap-4 rounded-lg bg-neutral-950/60 p-4 text-white">
-                <div className="relative h-40 w-full overflow-hidden rounded-md bg-neutral-800 flex justify-center items-center">
-                  {cardVideos[i] ? (
+              {/* Base layer: scrolling image, visible by default */}
+              {project.image && (
+                <div className="absolute inset-0 w-full h-full overflow-hidden z-0 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                  <motion.img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-auto"
+                    animate={{ y: ["0%", "-40%", "0%"] }}
+                    transition={{
+                      duration: 38,
+                      ease: "linear",
+                      repeat: Infinity,
+                      repeatDelay: 1,
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Hover layer: video + text card, fades in on hover */}
+              <div className="absolute inset-0 z-10 flex flex-col bg-neutral-950 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="relative w-full h-[180px] overflow-hidden shrink-0">
+                  {cardVideos[i] && (
                     <video
                       ref={(el) => (videoRefs.current[i] = el)}
                       src={cardVideos[i]}
-                      loop
                       muted
+                      loop
                       playsInline
-                      onMouseEnter={() => videoRefs.current[i]?.play()}
-                      onMouseLeave={() => {
-                        videoRefs.current[i]?.pause();
-                        videoRefs.current[i].currentTime = 0;
-                      }}
-                      className="w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover"
                     />
-                  ) : project.image ? (
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-neutral-500 text-sm">
-                      Preview coming soon
-                    </div>
                   )}
                 </div>
 
-                <div className="flex flex-col flex-1 w-full">
+                <div className="flex flex-col flex-1 gap-3 p-4 text-white overflow-hidden">
                   <p className="text-lg font-bold">{project.title}</p>
-                  <p className="text-sm text-neutral-400 leading-relaxed mt-1 line-clamp-3">
+                  <p className="text-sm text-neutral-400 line-clamp-3">
                     {project.description}
                   </p>
-                </div>
 
-                <div className="flex justify-between items-end w-full">
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.slice(0, 3).map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="text-[11px] px-2 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-300"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  <div className="flex justify-between items-end w-full mt-auto">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.slice(0, 3).map((tech, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[11px] px-2 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
 
-                  <button
-                    type="button"
-                    onClick={() => window.open(project.liveLink, "_blank", "noopener,noreferrer")}
-                    className="shrink-0 -translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 duration-300 transition-all"
-                    aria-label={`Visit ${project.title} live site`}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="w-7 h-7 text-cyan-400 hover:scale-110 transition-transform"
+                    <button
+                      type="button"
+                      onClick={() => window.open(project.liveLink, "_blank", "noopener,noreferrer")}
+                      className="shrink-0 hover:scale-110 transition-transform"
+                      aria-label={`Visit ${project.title} live site`}
                     >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M5 12l14 0" />
-                      <path d="M13 18l6 -6" />
-                      <path d="M13 6l6 6" />
-                    </svg>
-                  </button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="w-7 h-7 text-cyan-400"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M5 12l14 0" />
+                        <path d="M13 18l6 -6" />
+                        <path d="M13 6l6 6" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
-
-              <div className="absolute transition-all duration-500 top-1/2 -left-1/2 group-hover:top-12 group-hover:-left-1/4 h-48 w-56 -z-10 bg-cyan-600/60 blur-[50px]" />
             </motion.div>
           ))}
         </div>

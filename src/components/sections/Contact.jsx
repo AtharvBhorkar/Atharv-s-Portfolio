@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import { Send, Mail, MapPin, Clock, User, Tag, MessageSquare, ShieldCheck, Check } from "lucide-react";
 import { fadeUp, fadeIn, viewportOnce } from "../../utils/animations";
 
@@ -50,11 +51,22 @@ const Contact = () => {
     setStatus("sending");
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      await emailjs.send(
+        "service_dcezl7z",
+        "template_k21026p",
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        "RKjYcDsWHpsLMXTZ0"
+      );
       setStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
       setTimeout(() => setStatus("idle"), 4000);
     } catch (err) {
+      console.error("EmailJS error:", err);
       setStatus("error");
       setTimeout(() => setStatus("idle"), 4000);
     }

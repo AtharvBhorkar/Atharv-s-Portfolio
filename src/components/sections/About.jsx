@@ -148,7 +148,7 @@ const About = () => {
             </h2>
 
             <p className="text-neutral-400 text-base leading-relaxed mb-4">
-              I'm Atharv, a frontend developer currently working as an
+              I'm Atharv Bhorkar, a frontend developer currently working as an
               intern, where I build responsive websites and web apps using
               React, Tailwind, and modern JavaScript. I enjoy taking a design
               and turning it into a smooth, animated, real product — not

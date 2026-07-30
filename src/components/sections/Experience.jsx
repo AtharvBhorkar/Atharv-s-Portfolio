@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Calendar } from "lucide-react";
+import { Calendar, ExternalLink } from "lucide-react";
 import { experiences } from "../../data/experience";
 import { fadeUp, fadeIn, slideInLeft, viewportOnce } from "../../utils/animations";
 
@@ -59,7 +59,17 @@ const Experience = () => {
                   style={{ boxShadow: "0 0 12px rgba(34,211,238,0.7)" }}
                 />
 
-                <div className="border border-cyan-500/20 rounded-2xl p-6 md:p-7 bg-neutral-900/40 backdrop-blur-sm shadow-[0_0_25px_rgba(34,211,238,0.08)] hover:border-cyan-500/40 transition-colors duration-300">
+                <div className="relative border border-cyan-500/20 rounded-2xl p-6 md:p-7 bg-neutral-900/40 backdrop-blur-sm shadow-[0_0_25px_rgba(34,211,238,0.08)] hover:border-cyan-500/40 transition-colors duration-300">
+                  {exp.link && (
+                    <a
+                      href={exp.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute bottom-4 right-4 flex items-center gap-1 text-cyan-300 text-xs px-3 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 hover:bg-cyan-500/15 hover:border-cyan-400/50 transition-colors"
+                    >
+                      Visit <ExternalLink size={12} />
+                    </a>
+                  )}
                   <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
                     <div>
                       <h3 className="text-white text-lg font-semibold">

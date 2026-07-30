@@ -127,11 +127,10 @@ const Hero = () => {
         className="sticky top-0 w-full h-screen bg-neutral-950 pt-4 sm:pt-12 pb-0 overflow-hidden"
       >
         <div
-          className={`relative z-10 max-w-7xl mx-auto px-4 sm:px-6 flex gap-4 sm:gap-8 ${
-            morphed
+          className={`relative z-10 max-w-7xl mx-auto px-4 sm:px-6 flex gap-4 sm:gap-8 ${morphed
               ? "flex-col xl:flex-row items-center justify-between pt-16 sm:pt-20 xl:pt-24"
               : "flex-col items-center text-center"
-          }`}
+            }`}
         >
           <motion.div
             style={morphed ? {} : { width: textWidth }}
@@ -142,11 +141,10 @@ const Hero = () => {
               initial="hidden"
               animate="visible"
               transition={{ delay: 0.15 }}
-              className={`font-semibold leading-[1.05] tracking-tight ${
-                morphed
+              className={`font-semibold leading-[1.05] tracking-tight ${morphed
                   ? "whitespace-normal xl:whitespace-nowrap text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-white"
                   : "whitespace-normal sm:whitespace-nowrap text-3xl sm:text-5xl md:text-7xl lg:text-8xl mb-4 md:mb-6 text-white"
-              }`}
+                }`}
               style={!morphed ? { fontFamily: "'Space Grotesk', sans-serif" } : undefined}
             >
               {morphed ? (
@@ -181,11 +179,10 @@ const Hero = () => {
               initial="hidden"
               animate="visible"
               transition={{ delay: 0.3 }}
-              className={`font-semibold leading-[1.05] mb-2 ${
-                morphed
+              className={`font-semibold leading-[1.05] mb-2 ${morphed
                   ? "text-3xl sm:text-4xl md:text-6xl lg:text-7xl tracking-tight text-center xl:text-left bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-400 to-teal-300 whitespace-normal"
                   : "text-base sm:text-lg md:text-2xl lg:text-3xl text-neutral-500 tracking-[0.15em] sm:tracking-[0.3em] uppercase flex flex-wrap items-center justify-center w-full whitespace-normal sm:whitespace-nowrap"
-              }`}
+                }`}
               style={!morphed ? { fontFamily: "'Space Grotesk', sans-serif" } : undefined}
             >
               {morphed ? (
@@ -254,10 +251,10 @@ const Hero = () => {
                 type="button"
                 className="group relative flex flex-col items-center justify-center w-[180px] h-[50px] decoration-0 transition-transform active:scale-95 cursor-pointer outline-none"
                 style={{
-                  backgroundColor: "rgba(255, 255, 255, 0.05)",
+                  background: "linear-gradient(135deg, rgba(30,58,138,0.5) 0%, rgba(59,130,246,0.2) 50%, rgba(255,255,255,0.1) 100%)",
                   borderRadius: "8px",
                   opacity: 1,
-                  border: "none",
+                  border: "1px solid rgba(96,165,250,0.3)",
                   padding: 0,
                 }}
               >
@@ -317,9 +314,8 @@ const Hero = () => {
           </motion.div>
 
           <div
-            className={`group relative w-full max-w-[280px] sm:max-w-sm md:max-w-md h-[300px] sm:h-[400px] md:h-[460px] lg:h-[520px] flex-shrink-0 ${
-              morphed ? "order-1 xl:order-2" : "-mt-16 sm:-mt-28 md:-mt-52 lg:-mt-72"
-            }`}
+            className={`group relative w-full max-w-[280px] sm:max-w-sm md:max-w-md h-[300px] sm:h-[400px] md:h-[460px] lg:h-[520px] flex-shrink-0 ${morphed ? "order-1 xl:order-2" : "-mt-16 sm:-mt-28 md:-mt-52 lg:-mt-72"
+              }`}
           >
             <div
               className="absolute top-[-10%] left-[15%] w-[3px] h-[120%] pointer-events-none -z-20 opacity-0 group-hover:opacity-100 transition-all duration-500"
@@ -373,9 +369,8 @@ const Hero = () => {
 
             <motion.div
               style={{ opacity: circleOpacity, scale: circleScale }}
-              className={`absolute inset-0 flex items-center ${
-                morphed ? "justify-center xl:justify-end" : "justify-center"
-              }`}
+              className={`absolute inset-0 flex items-center ${morphed ? "justify-center xl:justify-end" : "justify-center"
+                }`}
             >
               <div className="group relative w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[420px] md:h-[420px] lg:w-[460px] lg:h-[460px] rounded-full">
                 <div
