@@ -8,6 +8,7 @@ export const projects = [
     liveLink: "https://vaidehiiacademy.vercel.app/",
     githubLink: "https://github.com/AtharvBhorkar/vaidehi-academy.git",
     featured: true,
+    lead: true,
   },
   {
     title: "Aman Tours And Travels (ATAT)",
@@ -18,6 +19,7 @@ export const projects = [
     liveLink: "https://www.amantourandtravel.in/",
     githubLink: "https://github.com/AtharvBhorkar/Aman-Tours-and-Travels.git",
     featured: false,
+    lead: true,
   },
   {
     title: "Comfy Sportwear",

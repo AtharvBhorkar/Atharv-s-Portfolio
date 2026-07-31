@@ -5,11 +5,12 @@ export const experiences = [
     duration: "2026 — Present",
     type: "Internship",
     link: "https://athenura.in",
+    linkedinLink: "https://www.linkedin.com/company/athenura/",
     description:
       "Working as a Frontend Developer Intern with a dual role — Review Team Lead (consolidating website QA reviews across the team) and Core Team member. Contributing to multiple client projects using React, Tailwind CSS, and Framer Motion.",
     highlights: [
       "Led a QA team and conducted 20+ detailed website/project reviews within a month",
-      "Built and maintained frontend features across 4+ live client projects",
+      "Built and maintained frontend features across 5+ live client projects",
       "Managed off-page SEO tasks and backlink building for company blog",
     ],
   },

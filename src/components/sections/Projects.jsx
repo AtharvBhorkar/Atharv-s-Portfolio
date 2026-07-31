@@ -1,10 +1,12 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { projects } from "../../data/projects";
 import { fadeUp, fadeIn, viewportOnce } from "../../utils/animations";
 
 const Projects = () => {
   const videoRefs = useRef([]);
+  const sectionRef = useRef(null);
+  const [activeCard, setActiveCard] = useState(null);
   const cardVideos = [
     "/project1.mp4",
     "/project2.mp4",
@@ -14,9 +16,24 @@ const Projects = () => {
     "/project6.mp4",
   ];
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (sectionRef.current && !sectionRef.current.contains(e.target)) {
+        setActiveCard(null);
+      }
+    };
+    document.addEventListener("touchstart", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <section
       id="projects"
+      ref={sectionRef}
       className="relative w-full bg-neutral-950 py-24 px-6 overflow-hidden"
     >
             <div className="absolute top-1/4 right-0 -translate-y-1/2 w-[450px] h-[450px] bg-blue-600/15 rounded-full blur-[150px] pointer-events-none" />
@@ -70,11 +87,34 @@ const Projects = () => {
                   vid.currentTime = 0;
                 }
               }}
-              className="group relative h-[420px] w-full max-w-[280px] overflow-hidden rounded-xl border border-cyan-500/30 bg-neutral-900/40 backdrop-blur-sm shadow-[0_0_25px_rgba(34,211,238,0.15)] hover:border-cyan-400/60 transition-colors duration-300"
+              onClick={() => {
+                setActiveCard((prev) => (prev === i ? null : i));
+                const vid = videoRefs.current[i];
+                if (vid) {
+                  if (activeCard !== i) vid.play();
+                  else {
+                    vid.pause();
+                    vid.currentTime = 0;
+                  }
+                }
+              }}
+              className={`group relative h-[420px] w-full max-w-[280px] overflow-hidden rounded-xl border border-cyan-500/30 bg-neutral-900/40 backdrop-blur-sm shadow-[0_0_25px_rgba(34,211,238,0.15)] hover:border-cyan-400/60 transition-colors duration-300 cursor-pointer ${
+                activeCard === i ? "border-cyan-400/60" : ""
+              }`}
             >
+              {project.lead && (
+                <span className="absolute top-3 right-3 z-20 px-3 py-1 rounded-full text-[11px] font-semibold text-neutral-950 bg-gradient-to-r from-blue-400 to-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]">
+                  Project Lead
+                </span>
+              )}
+
               {/* Base layer: scrolling image, visible by default */}
               {project.image && (
-                <div className="absolute inset-0 w-full h-full overflow-hidden z-0 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                <div
+                  className={`absolute inset-0 w-full h-full overflow-hidden z-0 transition-opacity duration-300 group-hover:opacity-0 ${
+                    activeCard === i ? "opacity-0" : "opacity-100"
+                  }`}
+                >
                   <motion.img
                     src={project.image}
                     alt={project.title}
@@ -91,7 +131,11 @@ const Projects = () => {
               )}
 
               {/* Hover layer: video + text card, fades in on hover */}
-              <div className="absolute inset-0 z-10 flex flex-col bg-neutral-950 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div
+                className={`absolute inset-0 z-10 flex flex-col bg-neutral-950 transition-opacity duration-300 group-hover:opacity-100 ${
+                  activeCard === i ? "opacity-100" : "opacity-0"
+                }`}
+              >
                 <div className="relative w-full h-[180px] overflow-hidden shrink-0">
                   {cardVideos[i] && (
                     <video
