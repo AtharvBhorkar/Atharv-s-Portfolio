@@ -32,9 +32,9 @@ export const projects = [
     featured: false,
   },
   {
-    title: "Athenura Internship Portal",
+    title: "ATH Hackathon Portal",
     description:
-      "A dedicated portal for managing internship applications, listings, and student onboarding at Athenura.",
+      "An event platform for managing hackathon registrations, teams, and submissions.",
     tech: ["React", "Node.js", "MongoDB"],
     image: "/hackathon.png",
     liveLink: "https://hackathon.athenura.in/",
@@ -52,10 +52,10 @@ export const projects = [
     featured: false,
   },
   {
-    title: "ATH Hackathon",
+    title: "Athenura Internship Portal",
     description:
-      "An event platform for managing hackathon registrations, teams, and submissions.",
-    tech: ["React", "Tailwind CSS", "Node.js"],
+      "A dedicated portal for managing internship applications, listings, and student onboarding at Athenura.",
+    tech: ["HTML", "CSS", "JavaScript"],
     image: "/internship.png",
     liveLink: "https://internship.athenura.in/",
     githubLink: "",
